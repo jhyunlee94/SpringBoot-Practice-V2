@@ -18,7 +18,7 @@ public class BoardValidator implements Validator {
     @Override
     public void validate(Object obj, Errors e) {
         Board b = (Board) obj;
-        if(ObjectUtils.isEmpty(b.getContent())) {
+        if(StringUtils.isEmpty(b.getContent())) {
             //StringUtils Board에 Content가 비어있는지 확인해보겠습니다.
             //isEmpty가 사라져서 대체로
             //ObjectUtils.isEmpty

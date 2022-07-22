@@ -44,6 +44,7 @@ public class BoardController {
 
     @PostMapping("/form")
     public String form(@Valid Board board, BindingResult bindingResult){
+        boardValidator.validate(board, bindingResult);
         if(bindingResult.hasErrors()) {
             //값이 부합하는지 안하는지 hasErrors()로 처리가능
             //GetMapping 에서 처리한거 넣어줌
