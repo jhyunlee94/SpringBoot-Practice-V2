@@ -2,12 +2,15 @@ package com.example.mvc.controller;
 
 import com.example.mvc.entity.Board;
 import com.example.mvc.repository.BoardRepository;
+import com.example.mvc.service.BoardService;
 import com.example.mvc.validator.BoardValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +26,9 @@ public class BoardController {
 
     @Autowired
     private BoardRepository boardRepository;
+
+    @Autowired
+    private BoardService boardService;
 
     @Autowired
     private BoardValidator boardValidator;
@@ -53,14 +59,23 @@ public class BoardController {
     }
 
     @PostMapping("/form")
-    public String form(@Valid Board board, BindingResult bindingResult){
+    public String postForm(@Valid Board board, BindingResult bindingResult, Authentication authentication) {
+        // 인증정보 가져오는게 Authentication으로 가져옴
         boardValidator.validate(board, bindingResult);
         if(bindingResult.hasErrors()) {
             //값이 부합하는지 안하는지 hasErrors()로 처리가능
             //GetMapping 에서 처리한거 넣어줌
             return "board/form";
         }
+
+        //
+        //인증정보 가져오기
+        //또는
+//        Authentication a = SecurityContextHolder.getContext().getAuthentication(); 이 방법도 있음
+        String username = authentication.getName();
+
         //다시 board를 받아오는거
+        boardService.save(username, board);
         boardRepository.save(board);
         return "redirect:/board/list";
     }

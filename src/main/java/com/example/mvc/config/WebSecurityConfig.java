@@ -36,10 +36,11 @@ public class WebSecurityConfig  {
     @Order(SecurityProperties.BASIC_AUTH_ORDER)
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
                 //.antMatchers("/","/starter-template.css").permitAll() 만약 style.css 가 깨지면 이렇게 넣으면 되는데 그러면 추가 할때마다 넣어줘야하니까
                 //.antMatchers("/","/css/**").permitAll() /css 아래에 모든 파일을 읽어준다.
-                    .antMatchers("/","/account/register","/css/**").permitAll()
+                    .antMatchers("/","/account/register","/css/**", "/api/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
