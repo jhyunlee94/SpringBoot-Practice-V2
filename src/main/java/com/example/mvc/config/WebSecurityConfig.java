@@ -39,7 +39,7 @@ public class WebSecurityConfig  {
                 .authorizeRequests()
                 //.antMatchers("/","/starter-template.css").permitAll() 만약 style.css 가 깨지면 이렇게 넣으면 되는데 그러면 추가 할때마다 넣어줘야하니까
                 //.antMatchers("/","/css/**").permitAll() /css 아래에 모든 파일을 읽어준다.
-                    .antMatchers("/","/css/**").permitAll()
+                    .antMatchers("/","/account/register","/css/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
@@ -66,12 +66,12 @@ public class WebSecurityConfig  {
                 .dataSource(dataSource)
                 .passwordEncoder(passwordEncoder())
                 .usersByUsernameQuery("select username, password, enabled "
-                        + "from users "
+                        + "from user "
                         + "where username = ?")
-                .authoritiesByUsernameQuery("select username, name "
+                .authoritiesByUsernameQuery("select u.username, r.name "
                         + "from user_role ur inner join user u on ur.user_id = u.id "
                         + "inner join role r on ur.role_id = r.id "
-                        + "where email = ?");
+                        + "where u.username = ?");
     }
 
 //    Authentication 로그인
