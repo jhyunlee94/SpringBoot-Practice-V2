@@ -56,4 +56,4 @@ SpringBoot, Thymeleaf, BootStrap 연습
 <!--<img src="https://img.shields.io/badge/MySQL Workbench-4479A1?style=flat-square&logo=MySQL&logoColor=white"/></a>-->
 <img src="https://img.shields.io/badge/Tomcat-F8DC75?style=flat-square&logo=Apache Tomcat&logoColor=black"/></a>
 <img src="https://img.shields.io/badge/STS-6DB33F?style=flat-square&logo=Spring&logoColor=white"></a>
-<img src="https://img.shields.io/badge/IntelliJ-6DB33F?style=flat-square&logo=IntelliJ%20IDEA&logoColor=white"></a>
+<img src="https://img.shields.io/badge/IntelliJ-000000?style=flat-square&logo=IntelliJ%20IDEA&logoColor=white"></a>
